@@ -1,4 +1,5 @@
 package workforge.organization;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
     @PostMapping("/api/organizations")
-    public Organization createOrganization(@RequestBody CreateOrganizationRequest request) {
+    public Organization createOrganization(@Valid @RequestBody CreateOrganizationRequest request) {
         return organizationService.createOrganization(request.getName(),request.getSlug());
     }
 
@@ -30,7 +31,7 @@ public class OrganizationController {
     }
 
     @PutMapping("/api/organizations/{id}")
-    public ResponseEntity<Organization> updateOrganization(@PathVariable Long id,@RequestBody UpdateOrganizationRequest request) {
+    public ResponseEntity<Organization> updateOrganization(@PathVariable Long id, @Valid @RequestBody UpdateOrganizationRequest request) {
         Organization organization = organizationService.updateOrganization(id,request.getName(),request.getSlug());
         if(organization == null) {
             return ResponseEntity.notFound().build();
