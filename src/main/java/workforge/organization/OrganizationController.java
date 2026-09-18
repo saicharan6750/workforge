@@ -18,11 +18,9 @@ public class OrganizationController {
 
     @GetMapping("/api/organizations/{id}")
     public ResponseEntity<Organization> getOrganizationById(@PathVariable Long id) {
-        Organization organization = organizationService.getOrganizationById(id);
-        if(organization == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(organization);
+
+        return ResponseEntity.ok(organizationService.getOrganizationById(id));
+
     }
 
     @GetMapping("/api/organizations")
